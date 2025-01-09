@@ -1,10 +1,10 @@
 import random
 
 class BankAccount:
-    def __init__(self, owner, balance, account_no=None, has_overdraft=False):
+    def __init__(self, owner, balance, account_no, has_overdraft=False):
         self.owner = owner
         self.balance = balance
-        self.account_no = account_no if account_no else random.randint(11111, 99999)
+        self.account_no = account_no
         self.has_overdraft = has_overdraft
 
     def deposit(self, amount):
@@ -21,9 +21,9 @@ class BankAccount:
     def __str__(self):
         return f"Account {self.account_no} - Owner: {self.owner} - Balance: {self.balance}"
 
-
+# SavingsAccount类继承自BankAccount类，但是覆盖了withdraw方法，使其不允许取款。
 class SavingsAccount(BankAccount):
-    def __init__(self, owner, balance, account_no=None):
+    def __init__(self, owner, balance, account_no):
         # 使用父类的构造函数
         super().__init__(owner, balance, account_no)
         
@@ -34,7 +34,7 @@ class SavingsAccount(BankAccount):
 # 示例：
 
 # 创建一个普通银行账户
-bank_account = BankAccount(owner="Alice", balance=1000)
+bank_account = BankAccount("Alice", 1000, random.randint(11111, 99999))
 print(bank_account)  # Account 会显示账户信息
 
 # 存款操作
@@ -43,8 +43,9 @@ print(bank_account.deposit(500))  # 1500
 # 取款操作
 print(bank_account.withdraw(200))  # 1300
 
+
 # 创建一个储蓄账户
-savings_account = SavingsAccount(owner="Bob", balance=2000)
+savings_account = SavingsAccount("Bob", 2000,random.randint(11111, 99999))
 print(savings_account)  # Account 会显示账户信息
 
 # 储蓄账户尝试取款
